@@ -2,19 +2,19 @@
 session_start();
 include('../db/db.php');
 
-if (isset($_POST['usuario']) && isset($_POST['contrasenia'])) {
+if (isset($_POST['usuario']) && isset($_POST['password'])) {
     $usuario = $_POST['usuario'];
-    $contrasenia = $_POST['contrasenia'];
+    $contrasena = $_POST['password'];
 
-    $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND contrasenia = '$contrasenia'";
+    // Usamos 'contrasena' en la consulta
+    $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND contrasena = '$contrasena'";
     $resultado = mysqli_query($connection, $query);
 
     if ($row = mysqli_fetch_assoc($resultado)) {
-        // --- GUARDA AMBAS VARIABLES AQUÍ ---
-        $_SESSION['id_usuario'] = $row['id_cliente']; // El ID numérico para las tablas relacionales (foro, etc.)
-        $_SESSION['usuario'] = $row['usuario'];     // El nombre para mostrar en tu perfil
+        $_SESSION['id_usuario'] = $row['id_cliente']; 
+        $_SESSION['usuario'] = $row['usuario'];     
+        $_SESSION['rol'] = $row['rol']; 
 
-        // Redirigimos al perfil
         header("Location: miPerfilController.php");
         exit();
     } else {

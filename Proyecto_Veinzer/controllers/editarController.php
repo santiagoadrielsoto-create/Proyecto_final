@@ -1,18 +1,28 @@
 <?php
+session_start();
 include('../db/db.php');
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST['id'];
-    $usuario = $_POST['usuario'];
-    $correo = $_POST['correo'];
-    $telefono = $_POST['telefono'];
-    $rol = $_POST['rol'];
 
-    $update = "UPDATE usuarios SET usuario='$usuario', correo='$correo', telefono='$telefono', rol='$rol' WHERE id_cliente=$id";
-    if (mysqli_query($connection, $update)) {
-        echo "<script>alert('Modificado con éxito'); window.location='crudController.php';</script>";
-    } else {
-        echo "Error al modificar: " . mysqli_error($connection);
-    }
+// Procesar la actualización cuando se envía el formulario
+if (isset($_POST['actualizar'])) {
+    $id = intval($_POST['id']);
+    $usuario = mysqli_real_escape_string($connection, $_POST['usuario']);
+    $correo = mysqli_real_escape_string($connection, $_POST['correo']);
+    $telefono = mysqli_real_escape_string($connection, $_POST['telefono']);
+
+    $query_update = "UPDATE usuarios SET usuario = '$usuario', correo = '$correo', telefono = '$telefono' WHERE id_cliente = '$id'";
+    mysqli_query($connection, $query_update);
+
+    header("Location: crudController.php");
+    exit();
 }
-mysqli_close($connection);
+
+// Cargar los datos del usuario a modificar
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+    $query = "SELECT * FROM usuarios WHERE id_cliente = '$id'";
+    $resultado = mysqli_query($connection, $query);
+    $usuario_actual = mysqli_fetch_assoc($resultado);
+
+    include('../views/editarUsuario.php');
+}
 ?>
