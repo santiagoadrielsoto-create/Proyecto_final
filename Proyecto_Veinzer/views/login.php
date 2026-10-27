@@ -1,37 +1,45 @@
-<?php if (session_status() === PHP_SESSION_NONE) { session_start(); } ?>
+<?php
+if (session_status() === PHP_SESSION_NONE) { session_start(); }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Iniciar Sesión - Veinzer</title>
     <style>
-        body { background: #121212; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Segoe UI', Tahoma, sans-serif; color: #fff; }
-        .login-card { background: #1e1e1e; padding: 40px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); width: 100%; max-width: 400px; border-top: 4px solid #ff5722; }
-        h2 { margin-bottom: 25px; font-size: 1.8rem; text-align: center; }
-        label { display: block; margin-bottom: 8px; color: #aaa; font-size: 0.9rem; }
-        input[type="text"], input[type="password"] { width: 100%; padding: 12px; background: #2a2a2a; border: 1px solid #3d3d3d; border-radius: 6px; color: #fff; margin-bottom: 20px; font-size: 1rem; }
-        input:focus { outline: none; border-color: #ff5722; }
-        .btn-submit { width: 100%; background: #ff5722; color: #fff; padding: 12px; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        body { background-color: #121212; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: #1e1e1e; padding: 40px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.6); border-top: 5px solid #ff5722; width: 100%; max-width: 400px; text-align: center; }
+        .login-card h2 { color: #fff; margin-bottom: 25px; font-size: 1.8rem; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; color: #aaa; font-size: 0.9rem; margin-bottom: 6px; }
+        .form-control { width: 100%; padding: 12px; background: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 6px; color: #fff; font-size: 0.95rem; }
+        .form-control:focus { outline: none; border-color: #ff5722; }
+        .btn-submit { width: 100%; background: #ff5722; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
         .btn-submit:hover { background: #e64a19; }
-        .footer-link { text-align: center; margin-top: 20px; font-size: 0.9rem; color: #888; }
-        .footer-link a { color: #ff5722; text-decoration: none; }
+        .login-footer { margin-top: 20px; font-size: 0.9rem; color: #888; }
+        .login-footer a { color: #ff5722; text-decoration: none; }
+        .login-footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
+
     <div class="login-card">
         <h2>Iniciar Sesión</h2>
         <form action="../controllers/loginController.php" method="POST">
-            <label>Usuario</label>
-            <input type="text" name="usuario" required autocomplete="off">
-
-            <label>Contraseña</label>
-            <input type="password" name="password" required>
-
-            <button type="submit" class="btn-submit">Ingresar</button>
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" name="correo" class="form-control" required placeholder="ejemplo@gmail.com">
+            </div>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" name="password" class="form-control" required placeholder="********">
+            </div>
+            <button type="submit" name="ingresar" class="btn-submit">Ingresar</button>
         </form>
-        <div class="footer-link">
+        <div class="login-footer">
             ¿No tienes cuenta? <a href="registrar.php">Regístrate aquí</a>
         </div>
     </div>
+
 </body>
 </html>

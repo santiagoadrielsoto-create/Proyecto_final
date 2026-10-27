@@ -1,22 +1,53 @@
 <style>
-    footer { background: #181818; color: #aaa; padding: 35px 20px 20px; text-align: center; border-top: 1px solid #2a2a2a; margin-top: 50px; }
-    footer h4 { color: #fff; margin-bottom: 15px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
-    .social-buttons { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
-    .social-btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 22px; border-radius: 30px; background: #252525; color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid #333; }
-    .social-btn.github:hover { background: #333; border-color: #555; }
-    .social-btn.youtube:hover { background: #ff0000; border-color: #ff0000; }
-    .social-btn.facebook:hover { background: #1877f2; border-color: #1877f2; }
-    .copyright { font-size: 0.85rem; color: #666; margin-top: 15px; }
+    footer {
+        background: #181818;
+        color: #888;
+        text-align: center;
+        padding: 25px 20px;
+        border-top: 1px solid #2a2a2a;
+        margin-top: auto;
+    }
+    .footer-content h4 { color: #fff; margin-bottom: 12px; font-size: 1.1rem; }
+    .social-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
+    .social-btn { 
+        background: #252525; 
+        color: #ccc; 
+        padding: 8px 16px; 
+        border-radius: 6px; 
+        text-decoration: none; 
+        font-size: 0.9rem; 
+        font-weight: 500; 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        transition: all 0.3s ease;
+        border: 1px solid #333;
+    }
+    .social-btn:hover { background: #ff5722; color: #fff; border-color: #ff5722; }
+    .footer-copy { font-size: 0.85rem; color: #666; }
+
+    /* RESPONSIVE PARA TABLETS Y CELULARES (Menor a 1024px) */
+    @media (max-width: 1024px) {
+        footer { padding: 20px 15px; }
+        .social-links { gap: 10px; }
+        .social-btn { padding: 10px 18px; font-size: 0.95rem; }
+    }
 </style>
 
 <footer>
-    <h4>Contáctanos</h4>
-    <div class="social-buttons">
-        <a href="https://github.com/santiagoadrielsoto-create/Proyecto_final" target="_blank" class="social-btn github">GitHub</a>
-        <a href="https://www.youtube.com/?app=desktop&hl=es" target="_blank" class="social-btn youtube">YouTube</a>
-        <a href="https://www.facebook.com/login/?next=https%3A%2F%2Fwww.facebook.com%2F%3Flocale%3Des_LA" target="_blank" class="social-btn facebook">Facebook</a>
-    </div>
-    <div class="copyright">
-        Todos los derechos reservados a Veinzer &copy; 2026
+    <div class="footer-content">
+        <h4>CONTÁCTANOS</h4>
+        <div class="social-links">
+            <a href="https://github.com" target="_blank" class="social-btn">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-btn">
+                <i class="fa-brands fa-youtube"></i> YouTube
+            </a>
+            <a href="https://facebook.com" target="_blank" class="social-btn">
+                <i class="fa-brands fa-facebook"></i> Facebook
+            </a>
+        </div>
+        <p class="footer-copy">Todos los derechos reservados a Veinzer &copy; 2026</p>
     </div>
 </footer>

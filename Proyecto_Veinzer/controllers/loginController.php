@@ -2,23 +2,31 @@
 session_start();
 include('../db/db.php');
 
-if (isset($_POST['usuario']) && isset($_POST['password'])) {
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['password'];
+if (isset($_POST['ingresar'])) {
+    $correo = mysqli_real_escape_string($connection, $_POST['correo']);
+    $password = mysqli_real_escape_string($connection, $_POST['password']);
 
-    // Usamos 'contrasena' en la consulta
-    $query = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND contrasena = '$contrasena'";
+    // Usamos 'contrasena' que es el nombre real de la columna en tu base de datos
+    $query = "SELECT * FROM usuarios WHERE correo = '$correo' AND contrasena = '$password'";
     $resultado = mysqli_query($connection, $query);
 
-    if ($row = mysqli_fetch_assoc($resultado)) {
-        $_SESSION['id_usuario'] = $row['id_cliente']; 
-        $_SESSION['usuario'] = $row['usuario'];     
-        $_SESSION['rol'] = $row['rol']; 
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        $usuario_data = mysqli_fetch_assoc($resultado);
+        
+        // Guardar las variables en la sesión
+        $_SESSION['usuario'] = $usuario_data['usuario'];
+        $_SESSION['id_usuario'] = intval($usuario_data['id_cliente']);
+        $_SESSION['rol'] = $usuario_data['rol'];
 
-        header("Location: miPerfilController.php");
+        header("Location: ../views/home.php");
         exit();
     } else {
-        echo "Datos incorrectos.";
+        echo "<script>alert('Correo o contraseña incorrectos'); window.location='../views/login.php';</script>";
+        exit();
     }
+} else {
+    header("Location: ../views/login.php");
+    exit();
 }
+mysqli_close($connection);
 ?>
